@@ -24,7 +24,7 @@ class ParkingFeeCalculatorTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-02T02:30:00");
+        give_parking_ends_at("2025-01-02T02:30:01");
 
         when_calculator();
 
@@ -56,7 +56,7 @@ class ParkingFeeCalculatorTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-02T01:00:00");
+        give_parking_ends_at("2025-01-02T01:00:01");
 
         when_calculator();
 
@@ -69,7 +69,7 @@ class ParkingFeeCalculatorTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-02T00:30:00");
+        give_parking_ends_at("2025-01-02T00:30:01");
 
         when_calculator();
 
@@ -82,7 +82,7 @@ class ParkingFeeCalculatorTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-02T00:15:00");
+        give_parking_ends_at("2025-01-02T00:15:01");
 
         when_calculator();
 
@@ -95,7 +95,7 @@ class ParkingFeeCalculatorTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-02T00:14:59");
+        give_parking_ends_at("2025-01-02T00:15:00");
 
         when_calculator();
 
