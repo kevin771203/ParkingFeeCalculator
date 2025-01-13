@@ -18,6 +18,10 @@ public class ParkingFeeCalculator {
             return 30L;
         }
 
-        return 60L;
+        if (minBetween < 60) {
+            return 60L;
+        }
+
+        return 90L;
     }
 }
