@@ -15,9 +15,13 @@ public class ParkingFeeCalculator {
             return 0L;
         }
 
+        return getRegularFee(minBetween);
+
+    }
+
+    private long getRegularFee(long minBetween) {
         long periods = minBetween / 30;
 
         return (periods + 1) * 30;
-
     }
 }
