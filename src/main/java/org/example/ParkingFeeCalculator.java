@@ -6,7 +6,6 @@ import java.time.temporal.ChronoUnit;
 public class ParkingFeeCalculator {
 
 
-
     public long calculate(LocalDateTime start, LocalDateTime end) {
 
         long minBetween = ChronoUnit.MINUTES.between(start, end);
