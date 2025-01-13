@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 public class ParkingFeeCalculator {
 
 
+
     public long calculate(LocalDateTime start, LocalDateTime end) {
 
         long minBetween = ChronoUnit.MINUTES.between(start, end);
@@ -14,14 +15,18 @@ public class ParkingFeeCalculator {
             return 0L;
         }
 
-        if (minBetween < 30) {
-            return 30L;
-        }
+        long periods = minBetween / 30;
 
-        if (minBetween < 60) {
-            return 60L;
-        }
-
-        return 90L;
+        return (periods + 1) * 30;
+//
+//        if (minBetween < 30) {
+//            return 30L;
+//        }
+//
+//        if (minBetween < 60) {
+//            return 60L;
+//        }
+//
+//        return 90L;
     }
 }
