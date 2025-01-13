@@ -26,22 +26,5 @@ public class ParkingFeeCalculator {
 
         return Math.min(fee, 150L);
 
-//        long minBetween = ChronoUnit.MINUTES.between(start, end);
-//
-//        if (minBetween <= 15) {
-//            return 0L;
-//        }
-//
-//        long regularFee = getRegularFee(minBetween);
-//
-//
-//
-//    }
-
-//    private long getRegularFee(long minBetween) {
-//        long periods = minBetween / 30;
-//
-//        return (periods + 1) * 30;
-//    }
     }
 }
