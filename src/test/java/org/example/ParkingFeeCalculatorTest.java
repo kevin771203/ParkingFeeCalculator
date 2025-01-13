@@ -7,6 +7,19 @@ import java.time.LocalDateTime;
 
 
 class ParkingFeeCalculatorTest {
+    @Test
+    void _over_150_mins_then_pay_150() {
+
+        ParkingFeeCalculator sut = new ParkingFeeCalculator();
+
+        long actual = sut.calculate(
+                LocalDateTime.parse("2025-01-01T00:00:00"),
+                LocalDateTime.parse("2025-01-01T02:30:00")
+        );
+
+        Assertions.assertThat(actual).isEqualTo(150L);
+
+    }
 
     @Test
     void _over_60_mins_then_pay_90() {

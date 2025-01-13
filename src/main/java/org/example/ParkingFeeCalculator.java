@@ -15,7 +15,9 @@ public class ParkingFeeCalculator {
             return 0L;
         }
 
-        return getRegularFee(minBetween);
+        long regularFee = getRegularFee(minBetween);
+
+        return Math.min(regularFee,150L);
 
     }
 
