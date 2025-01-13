@@ -22,18 +22,14 @@ class ParkingFeeCalculatorTest {
     @Test
     void _over_150_mins_then_pay_150() {
 
-        extracted("2025-01-01T00:00:00", "2025-01-01T02:30:00", 150L);
+        given_parking_starts_at("2025-01-02T00:00:00");
 
-    }
-
-    private void extracted(String startText, String endText, long expected) {
-
-        given_parking_starts_at(startText);
-        give_parking_ends_at(endText);
+        give_parking_ends_at("2025-01-02T02:30:00");
 
         when_calculator();
 
-        then_should_have(expected);
+        then_should_have(150L);
+
     }
 
     private void then_should_have(long expected) {
@@ -58,28 +54,52 @@ class ParkingFeeCalculatorTest {
     @Test
     void _over_60_mins_then_pay_90() {
 
-        extracted("2025-01-01T00:00:00", "2025-01-01T01:00:00", 90L);
+        given_parking_starts_at("2025-01-02T00:00:00");
+
+        give_parking_ends_at("2025-01-02T01:00:00");
+
+        when_calculator();
+
+        then_should_have(90L);
 
     }
 
     @Test
     void _over_30_mins_then_pay_60() {
 
-        extracted("2025-01-01T00:00:00", "2025-01-01T00:30:00", 60L);
+        given_parking_starts_at("2025-01-02T00:00:00");
+
+        give_parking_ends_at("2025-01-02T00:30:00");
+
+        when_calculator();
+
+        then_should_have(60L);
 
     }
 
     @Test
     void _over_15_mins_NOT_free() {
 
-        extracted("2025-01-01T00:00:00", "2025-01-01T00:15:00", 30L);
+        given_parking_starts_at("2025-01-02T00:00:00");
+
+        give_parking_ends_at("2025-01-02T00:15:00");
+
+        when_calculator();
+
+        then_should_have(30L);
 
     }
 
     @Test
     void _15_mins_free() {
 
-        extracted("2025-01-01T00:00:00","2025-01-01T00:14:59", 0L);
+        given_parking_starts_at("2025-01-02T00:00:00");
+
+        give_parking_ends_at("2025-01-02T00:14:59");
+
+        when_calculator();
+
+        then_should_have(0L);
 
     }
 }
