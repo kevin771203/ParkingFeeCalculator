@@ -1,12 +1,24 @@
 package org.example;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 
 class ParkingFeeCalculatorTest {
+
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private long actual;
+    private ParkingFeeCalculator sut;
+
+    @BeforeEach
+    void setUp() {
+        sut = new ParkingFeeCalculator();
+    }
+
     @Test
     void _over_150_mins_then_pay_150() {
 
@@ -15,14 +27,32 @@ class ParkingFeeCalculatorTest {
     }
 
     private void extracted(String startText, String endText, long expected) {
-        ParkingFeeCalculator sut = new ParkingFeeCalculator();
 
-        long actual = sut.calculate(
-                LocalDateTime.parse(startText),
-                LocalDateTime.parse(endText)
-        );
+        given_parking_starts_at(startText);
+        give_parking_ends_at(endText);
 
+        when_calculator();
+
+        then_should_have(expected);
+    }
+
+    private void then_should_have(long expected) {
         Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    private void give_parking_ends_at(String endText) {
+        end = LocalDateTime.parse(endText);
+    }
+
+    private void given_parking_starts_at(String startText) {
+        start = LocalDateTime.parse(startText);
+    }
+
+    private void when_calculator() {
+        actual = sut.calculate(
+                start,
+                end
+        );
     }
 
     @Test
