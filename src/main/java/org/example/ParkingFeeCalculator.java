@@ -4,23 +4,23 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 public class ParkingFeeCalculator {
 
+
+    private final Duration THIRTY_MINUTES = Duration.ofMinutes(30L);
+    private final Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
     public long calculate(LocalDateTime start, LocalDateTime end) {
 
         Duration duration = Duration.between(start, end);
 
-        if (duration.compareTo(Duration.ofMinutes(15L)) <= 0) {
+        if (duration.compareTo(FIFTY_MINUTES) <= 0) {
             return 0;
         }
 
-        Duration thirtyMinutes = Duration.ofMinutes(30L);
-
         long periods = BigDecimal.valueOf(duration.toNanos())
-                .divide(BigDecimal.valueOf(thirtyMinutes.toNanos()), RoundingMode.UP)
+                .divide(BigDecimal.valueOf(THIRTY_MINUTES.toNanos()), RoundingMode.UP)
                 .longValue();
         long fee = periods * 30;
 
