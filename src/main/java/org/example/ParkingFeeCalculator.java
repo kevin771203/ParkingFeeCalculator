@@ -15,16 +15,25 @@ public class ParkingFeeCalculator {
 
         Duration duration = Duration.between(start, end);
 
-        if (duration.compareTo(FIFTY_MINUTES) <= 0) {
-            return 0;
+        if (isShort(duration)) {
+            return 0L;
         }
 
+        long fee = getRegularFee(duration);
+
+        return Math.min(fee, 150L);
+
+    }
+
+    private long getRegularFee(Duration duration) {
         long periods = BigDecimal.valueOf(duration.toNanos())
                 .divide(BigDecimal.valueOf(THIRTY_MINUTES.toNanos()), RoundingMode.UP)
                 .longValue();
         long fee = periods * 30;
+        return fee;
+    }
 
-        return Math.min(fee, 150L);
-
+    private boolean isShort(Duration duration) {
+        return duration.compareTo(FIFTY_MINUTES) <= 0;
     }
 }
