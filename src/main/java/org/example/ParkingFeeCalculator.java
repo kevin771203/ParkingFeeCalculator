@@ -5,11 +5,11 @@ import java.util.List;
 
 public class ParkingFeeCalculator {
 
-    private final HolidayBook holidayBook;
+    private final PriceBook priceBook;
     private Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
     public ParkingFeeCalculator() {
-        holidayBook = new HolidayBook();
+        priceBook = new PriceBook();
     }
 
     public long calculate(ParkingSession parkingSession) {
@@ -20,21 +20,9 @@ public class ParkingFeeCalculator {
             return 0L;
         }
 
-
         List<DailySession> dailySessions = parkingSession.getDailySessions();
 
-        long totalFee = 0L;
-        for (DailySession dailySession : dailySessions) {
-
-            long dailyFee = holidayBook.getDailyFee(dailySession);
-
-            totalFee += dailyFee;
-
-        }
-
-
-        return totalFee;
-
+        return dailySessions.stream().mapToLong(priceBook::getDailyFee).sum();
 
     }
 
