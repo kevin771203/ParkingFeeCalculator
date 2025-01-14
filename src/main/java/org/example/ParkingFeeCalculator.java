@@ -3,8 +3,6 @@ package org.example;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingFeeCalculator {
@@ -22,7 +20,7 @@ public class ParkingFeeCalculator {
         }
 
 
-        List<Duration> dailyDurations = getDailyDurations(parkingSession);
+        List<Duration> dailyDurations = parkingSession.getDailyDurations();
 
         long totalFee = 0L;
         for (Duration dailyDuration : dailyDurations) {
@@ -35,33 +33,6 @@ public class ParkingFeeCalculator {
         return totalFee;
 
 
-    }
-
-    private static List<Duration> getDailyDurations(ParkingSession parkingSession) {
-        List<Duration> dailyDurations = new ArrayList<>();
-        LocalDateTime todayStart = parkingSession.getStart().toLocalDate().atStartOfDay();
-        while (todayStart.isBefore(parkingSession.getEnd())) {
-
-
-            LocalDateTime tomorrowStart = todayStart.plusDays(1L);
-
-
-            LocalDateTime todaySessionStart = parkingSession.getStart().isAfter(todayStart)
-                    ? parkingSession.getStart()
-                    : todayStart;
-
-            LocalDateTime todaySessionEnd = parkingSession.getEnd().isBefore(tomorrowStart)
-                    ? parkingSession.getEnd()
-                    : tomorrowStart;
-
-            Duration todayDuration = Duration.between(todaySessionStart, todaySessionEnd);
-            dailyDurations.add(todayDuration);
-
-
-            todayStart = tomorrowStart;
-
-        }
-        return dailyDurations;
     }
 
     private long getRegularFee(Duration duration) {
