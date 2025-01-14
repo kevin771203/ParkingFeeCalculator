@@ -2,13 +2,12 @@ package org.example;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 @Data
 @AllArgsConstructor
 public final class ParkingSession {
@@ -17,9 +16,11 @@ public final class ParkingSession {
     private final LocalDateTime end;
 
 
-    @NotNull List<Duration> getDailyDurations() {
+    List<DailySession> getDailyDurations() {
 
         List<Duration> dailyDurations = new ArrayList<>();
+        List<DailySession>  dailySessions = new ArrayList<>();
+
         LocalDateTime todayStart = getStart().toLocalDate().atStartOfDay();
         while (todayStart.isBefore(getEnd())) {
 
@@ -38,11 +39,16 @@ public final class ParkingSession {
             Duration todayDuration = Duration.between(todaySessionStart, todaySessionEnd);
             dailyDurations.add(todayDuration);
 
+            dailySessions.add(new DailySession(
+                    todayDuration
+            ));
+
 
             todayStart = tomorrowStart;
 
         }
-        return dailyDurations;
+
+        return dailySessions;
     }
 
     Duration getTotalDuration() {

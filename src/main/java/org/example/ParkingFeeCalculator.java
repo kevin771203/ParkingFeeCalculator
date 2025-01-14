@@ -20,15 +20,16 @@ public class ParkingFeeCalculator {
         }
 
 
-        List<Duration> dailyDurations = parkingSession.getDailyDurations();
+        List<DailySession> dailyDurations = parkingSession.getDailyDurations();
 
         long totalFee = 0L;
-        for (Duration dailyDuration : dailyDurations) {
+        for (DailySession dailySession : dailyDurations) {
 
-            long todayFee = getRegularFee(dailyDuration);
+            long todayFee = getRegularFee(dailySession.getTodayDuration());
             totalFee += Math.min(todayFee, 150L);
 
         }
+
 
         return totalFee;
 
@@ -39,13 +40,14 @@ public class ParkingFeeCalculator {
         return duration.compareTo(FIFTY_MINUTES) <= 0;
     }
 
-
     private long getRegularFee(Duration duration) {
 
         long periods = BigDecimal.valueOf(duration.toNanos())
                 .divide(BigDecimal.valueOf(THIRTY_MINUTES.toNanos()), RoundingMode.UP)
                 .longValue();
-        long fee = periods * 30;
+
+        int unitPrice = 30;
+        long fee = periods * unitPrice;
         return fee;
 
     }

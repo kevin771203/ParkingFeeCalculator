@@ -28,11 +28,11 @@ class ParkingFeeCalculatorTest {
 
         when_calculator();
 
-        then_should_have(150L);
+        then_should_pay(150L);
 
     }
 
-    private void then_should_have(long expected) {
+    private void then_should_pay(long expected) {
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
@@ -58,7 +58,7 @@ class ParkingFeeCalculatorTest {
 
         when_calculator();
 
-        then_should_have(90L);
+        then_should_pay(90L);
 
     }
 
@@ -71,7 +71,7 @@ class ParkingFeeCalculatorTest {
 
         when_calculator();
 
-        then_should_have(30L + 150L);
+        then_should_pay(30L + 150L);
 
     }
 
@@ -84,7 +84,7 @@ class ParkingFeeCalculatorTest {
 
         when_calculator();
 
-        then_should_have(150L + 30L);
+        then_should_pay(150L + 30L);
 
     }
 
@@ -97,7 +97,7 @@ class ParkingFeeCalculatorTest {
 
         when_calculator();
 
-        then_should_have(150L + 150L);
+        then_should_pay(150L + 150L);
 
     }
 
@@ -110,7 +110,7 @@ class ParkingFeeCalculatorTest {
 
         when_calculator();
 
-        then_should_have(60L);
+        then_should_pay(60L);
 
     }
 
@@ -123,7 +123,20 @@ class ParkingFeeCalculatorTest {
 
         when_calculator();
 
-        then_should_have(30L);
+        then_should_pay(30L);
+
+    }
+
+    @Test
+    void _saturday_pay_50_half_hour() {
+
+        given_parking_starts_at("2025-01-04T00:00:00");
+
+        give_parking_ends_at("2025-01-04T00:15:01");
+
+        when_calculator();
+
+        then_should_pay(50L);
 
     }
 
@@ -136,7 +149,7 @@ class ParkingFeeCalculatorTest {
 
         when_calculator();
 
-        then_should_have(0L);
+        then_should_pay(0L);
 
     }
 }
