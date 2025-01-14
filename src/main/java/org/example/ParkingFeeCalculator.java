@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.List;
 
+import static org.example.HolidayBook.*;
+
 public class ParkingFeeCalculator {
 
     private final HolidayBook holidayBook = new HolidayBook();
@@ -27,7 +29,7 @@ public class ParkingFeeCalculator {
 
             long todayFee = getRegularFee(dailySession);
 
-            long dailyLimit = HolidayBook.isHoliday(dailySession.getToday())
+            long dailyLimit = holidayBook.isHoliday(dailySession.getToday())
                     ? 2400
                     : 150;
 

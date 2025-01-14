@@ -8,10 +8,14 @@ import java.util.Set;
 
 public class HolidayBook {
 
-    static boolean isHoliday(LocalDate today) {
+    private Set<LocalDate> nationalHolidays = new HashSet<>();
 
-        Set<LocalDate> nationalHolidays = new HashSet<>();
+    public HolidayBook() {
         nationalHolidays.add(LocalDate.of(2025, 1, 1));
+    }
+
+    boolean isHoliday(LocalDate today) {
+
 
 
 
