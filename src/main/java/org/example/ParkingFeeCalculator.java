@@ -19,14 +19,6 @@ public class ParkingFeeCalculator {
             return 0L;
         }
 
-//        if (start.toLocalDate().equals(end.toLocalDate())) {
-//
-//
-//            long fee = getRegularFee(duration);
-//
-//            return Math.min(fee, 150L);
-
-        //} else{
 
         LocalDateTime todayStart = start.toLocalDate().atStartOfDay();
 
@@ -81,7 +73,6 @@ public class ParkingFeeCalculator {
 
         return totalFee;
 
-        //}
 
     }
 
