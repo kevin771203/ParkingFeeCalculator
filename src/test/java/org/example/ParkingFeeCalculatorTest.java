@@ -78,6 +78,19 @@ class ParkingFeeCalculatorTest {
     }
 
     @Test
+    void _whole_day_then_partial_day() {
+
+        given_parking_starts_at("2025-01-02T00:00:00");
+
+        give_parking_ends_at("2025-01-03T00:10:00");
+
+        when_calculator();
+
+        then_should_have(150L + 30L);
+
+    }
+
+    @Test
     void _two_whole_days() {
 
         given_parking_starts_at("2025-01-02T00:00:00");
@@ -93,9 +106,9 @@ class ParkingFeeCalculatorTest {
     @Test
     void _over_30_mins_then_pay_60() {
 
-        given_parking_starts_at("2025-01-02T00:00:00");
+        given_parking_starts_at("2025-01-02T00:01:00");
 
-        give_parking_ends_at("2025-01-02T00:30:01");
+        give_parking_ends_at("2025-01-02T00:31:01");
 
         when_calculator();
 
