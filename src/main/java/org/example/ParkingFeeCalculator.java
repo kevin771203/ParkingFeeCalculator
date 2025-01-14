@@ -42,10 +42,7 @@ public class ParkingFeeCalculator {
 
             Duration todayDuration = Duration.between(todaySessionStart, todaySessionEnd);
             dailyDurations.add(todayDuration);
-
-//            long todayFee = getRegularFee(todayDuration);
-//            totalFee += Math.min(todayFee, 150L);
-
+            
 
             todayStart = tomorrowStart;
 
