@@ -2,14 +2,12 @@ package org.example;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.DayOfWeek;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.util.List;
 
 public class ParkingFeeCalculator {
 
-
+    private final HolidayBook holidayBook = new HolidayBook();
     private final Duration THIRTY_MINUTES = Duration.ofMinutes(30L);
     private final Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
@@ -29,7 +27,7 @@ public class ParkingFeeCalculator {
 
             long todayFee = getRegularFee(dailySession);
 
-            long dailyLimit = isHoliday(dailySession.getToday())
+            long dailyLimit = HolidayBook.isHoliday(dailySession.getToday())
                     ? 2400
                     : 150;
 
@@ -43,10 +41,6 @@ public class ParkingFeeCalculator {
 
     }
 
-    private static boolean isHoliday(LocalDate today) {
-        return List.of(DayOfWeek.SUNDAY, DayOfWeek.SATURDAY).contains(today.getDayOfWeek());
-    }
-
     private boolean isShort(Duration duration) {
         return duration.compareTo(FIFTY_MINUTES) <= 0;
     }
@@ -57,7 +51,7 @@ public class ParkingFeeCalculator {
                 .divide(BigDecimal.valueOf(THIRTY_MINUTES.toNanos()), RoundingMode.UP)
                 .longValue();
 
-        return periods * (isHoliday(dailySession.getToday())
+        return periods * (holidayBook.isHoliday(dailySession.getToday())
                 ? 50
                 : 30);
 
