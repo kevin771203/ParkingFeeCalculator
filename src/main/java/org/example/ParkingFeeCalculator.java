@@ -19,18 +19,41 @@ public class ParkingFeeCalculator {
             return 0L;
         }
 
-        long fee = getRegularFee(duration);
+        if (start.toLocalDate().equals(end.toLocalDate())) {
 
-        return Math.min(fee, 150L);
+
+            long fee = getRegularFee(duration);
+
+            return Math.min(fee, 150L);
+
+        } else{
+
+            LocalDateTime todayStart = start.toLocalDate().atStartOfDay();
+
+            long totalFee = 0L;
+
+            while(todayStart.isBefore(end)) {
+
+                totalFee += 150L;
+
+                todayStart = todayStart.plusDays(1L);
+
+            }
+
+            return totalFee;
+
+        }
 
     }
 
     private long getRegularFee(Duration duration) {
+
         long periods = BigDecimal.valueOf(duration.toNanos())
                 .divide(BigDecimal.valueOf(THIRTY_MINUTES.toNanos()), RoundingMode.UP)
                 .longValue();
         long fee = periods * 30;
         return fee;
+
     }
 
     private boolean isShort(Duration duration) {
