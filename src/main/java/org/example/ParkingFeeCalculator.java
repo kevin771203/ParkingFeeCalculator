@@ -13,16 +13,16 @@ public class ParkingFeeCalculator {
     private final Duration THIRTY_MINUTES = Duration.ofMinutes(30L);
     private final Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
-    public long calculate(ParkSession parkSession) {
+    public long calculate(ParkingSession parkingSession) {
 
-        Duration duration = Duration.between(parkSession.start(), parkSession.end());
+        Duration duration = Duration.between(parkingSession.getStart(), parkingSession.getEnd());
 
         if (isShort(duration)) {
             return 0L;
         }
 
 
-        List<Duration> dailyDurations = getDailyDurations(parkSession.start(), parkSession.end());
+        List<Duration> dailyDurations = getDailyDurations(parkingSession.getStart(), parkingSession.getEnd());
 
         long totalFee = 0L;
         for (Duration dailyDuration : dailyDurations) {

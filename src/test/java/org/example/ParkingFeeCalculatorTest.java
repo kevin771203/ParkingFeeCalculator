@@ -46,7 +46,7 @@ class ParkingFeeCalculatorTest {
 
     private void when_calculator() {
         actual = sut.calculate(
-                new ParkSession(start, end));
+                new ParkingSession(start, end));
     }
 
     @Test
