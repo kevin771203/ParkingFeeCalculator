@@ -18,6 +18,7 @@ public final class ParkingSession {
 
 
     @NotNull List<Duration> getDailyDurations() {
+
         List<Duration> dailyDurations = new ArrayList<>();
         LocalDateTime todayStart = getStart().toLocalDate().atStartOfDay();
         while (todayStart.isBefore(getEnd())) {
@@ -42,5 +43,9 @@ public final class ParkingSession {
 
         }
         return dailyDurations;
+    }
+
+    Duration getTotalDuration() {
+        return Duration.between(getStart(), getEnd());
     }
 }

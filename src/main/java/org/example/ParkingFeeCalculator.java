@@ -13,7 +13,7 @@ public class ParkingFeeCalculator {
 
     public long calculate(ParkingSession parkingSession) {
 
-        Duration duration = Duration.between(parkingSession.getStart(), parkingSession.getEnd());
+        Duration duration = parkingSession.getTotalDuration();
 
         if (isShort(duration)) {
             return 0L;
@@ -35,6 +35,11 @@ public class ParkingFeeCalculator {
 
     }
 
+    private boolean isShort(Duration duration) {
+        return duration.compareTo(FIFTY_MINUTES) <= 0;
+    }
+
+
     private long getRegularFee(Duration duration) {
 
         long periods = BigDecimal.valueOf(duration.toNanos())
@@ -45,7 +50,4 @@ public class ParkingFeeCalculator {
 
     }
 
-    private boolean isShort(Duration duration) {
-        return duration.compareTo(FIFTY_MINUTES) <= 0;
-    }
 }
