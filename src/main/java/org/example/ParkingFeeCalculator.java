@@ -2,7 +2,9 @@ package org.example;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.DayOfWeek;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ParkingFeeCalculator {
@@ -20,12 +22,12 @@ public class ParkingFeeCalculator {
         }
 
 
-        List<DailySession> dailyDurations = parkingSession.getDailyDurations();
+        List<DailySession> dailySessions = parkingSession.getDailySessions();
 
         long totalFee = 0L;
-        for (DailySession dailySession : dailyDurations) {
+        for (DailySession dailySession : dailySessions) {
 
-            long todayFee = getRegularFee(dailySession.getTodayDuration());
+            long todayFee = getRegularFee(dailySession.getTodayDuration() ,dailySession.getToday());
             totalFee += Math.min(todayFee, 150L);
 
         }
@@ -40,15 +42,17 @@ public class ParkingFeeCalculator {
         return duration.compareTo(FIFTY_MINUTES) <= 0;
     }
 
-    private long getRegularFee(Duration duration) {
+    private long getRegularFee(Duration duration, LocalDate today) {
 
         long periods = BigDecimal.valueOf(duration.toNanos())
                 .divide(BigDecimal.valueOf(THIRTY_MINUTES.toNanos()), RoundingMode.UP)
                 .longValue();
 
-        int unitPrice = 30;
-        long fee = periods * unitPrice;
-        return fee;
+        int unitPrice = DayOfWeek.SATURDAY.equals(today.getDayOfWeek())
+                ? 50
+                : 30;
+
+        return periods * unitPrice;
 
     }
 
