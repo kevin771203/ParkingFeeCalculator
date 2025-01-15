@@ -25,7 +25,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _over_150_mins_then_pay_150() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-02T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-02T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-02T02:30:01");
 
@@ -39,7 +39,7 @@ class CalculateParkingFeeServiceTest {
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
-    private void given_parking_starts_at(String plate, String startText) {
+    private void given_car_drives_in_at(String plate, String startText) {
         parkingSessionRepository.save(
                 new ParkingSession(plate, LocalDateTime.parse(startText), null)
         );
@@ -64,7 +64,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _over_60_mins_then_pay_90() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-02T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-02T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-02T01:00:01");
 
@@ -77,7 +77,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _partial_day_then_whole_day() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-02T23:50:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-02T23:50:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-04T00:00:00");
 
@@ -90,7 +90,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _whole_day_then_partial_day() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-02T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-02T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-03T00:10:00");
 
@@ -103,7 +103,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _two_whole_days() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-02T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-02T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-04T00:00:00");
 
@@ -116,7 +116,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _another_car() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-02T00:01:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-02T00:01:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-02T00:31:01");
 
@@ -129,7 +129,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _over_30_mins_then_pay_60() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-02T00:01:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-02T00:01:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-02T00:31:01");
 
@@ -142,7 +142,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _over_15_mins_NOT_free() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-02T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-02T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-02T00:15:01");
 
@@ -154,7 +154,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _sunday_pay_50_half_hour() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-05T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-05T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-05T00:15:01");
 
@@ -167,7 +167,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _saturday_daily_limit_is_2400() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-04T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-04T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-05T00:00:00");
 
@@ -180,7 +180,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _national_holiday_pay_50_half_hour() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-01T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-01T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-01T00:15:01");
 
@@ -193,7 +193,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _saturday_pay_50_half_hour() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-04T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-04T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-04T00:15:01");
 
@@ -206,7 +206,7 @@ class CalculateParkingFeeServiceTest {
     @Test
     void _15_mins_free() {
 
-        given_parking_starts_at("ABC-1234", "2025-01-02T00:00:00");
+        given_car_drives_in_at("ABC-1234", "2025-01-02T00:00:00");
 
         give_car_drives_out_at("ABC-1234", "2025-01-02T00:15:00");
 
