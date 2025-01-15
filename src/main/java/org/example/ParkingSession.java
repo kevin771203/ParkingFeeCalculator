@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +18,18 @@ public final class ParkingSession {
     @NotNull
     static ParkingSession start(String plate, LocalDateTime startTime) {
         return new ParkingSession(plate, startTime, null);
+    }
+
+    @NotNull
+    static ParkingSession restore(ParkingSessionPO parkingSessionPO) {
+        return new ParkingSession(
+                parkingSessionPO.getPlate(),
+                LocalDateTime.ofInstant(Instant.ofEpochMilli(parkingSessionPO.getStart()), ZoneId.systemDefault()),
+                parkingSessionPO.getEnd() == null
+                        ? null
+                        : LocalDateTime.ofInstant(Instant.ofEpochMilli(parkingSessionPO.getEnd()), ZoneId.systemDefault())
+        );
+
     }
 
     void end(LocalDateTime endTime) {

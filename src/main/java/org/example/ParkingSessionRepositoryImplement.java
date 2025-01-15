@@ -25,8 +25,7 @@ public class ParkingSessionRepositoryImplement implements ParkingSessionReposito
             return null;
         }
 
-        ParkingSession parkingSession = ParkingSessionPO.toEntity(parkingSessionPO);
-        return parkingSession;
+        return ParkingSession.restore(parkingSessionPO);
 
 
 
