@@ -114,6 +114,19 @@ class CalculateParkingFeeServiceTest {
     }
 
     @Test
+    void _another_car() {
+
+        given_parking_starts_at("ABC-1234", "2025-01-02T00:01:00");
+
+        give_car_drives_out_at("ABC-1234", "2025-01-02T00:31:01");
+
+        when_calculator("NOT_MY_CAR");
+
+        then_should_pay(0L);
+
+    }
+
+    @Test
     void _over_30_mins_then_pay_60() {
 
         given_parking_starts_at("ABC-1234", "2025-01-02T00:01:00");
