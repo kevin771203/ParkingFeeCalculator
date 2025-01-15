@@ -6,13 +6,10 @@ import java.util.List;
 public class CalculateParkingFeeService {
 
     private final ParkingSessionRepository parkingSessionRepository;
-//    private final ParkingSessionRepository parkingSessionRepository = this.parkingSessionRepository;
     private PriceBookRepository priceBookRepository;
     private Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
-//    public CalculateParkingFeeService() {
-//        this(new PriceBookRepositoryImplement(new PriceBook()), new ParkingSessionRepositoryImplement());
-//    }
+
 
     public CalculateParkingFeeService(PriceBookRepository priceBookRepository, ParkingSessionRepository parkingSessionRepository) {
 
@@ -26,6 +23,7 @@ public class CalculateParkingFeeService {
 
 
         ParkingSession parkingSession = parkingSessionRepository.find();
+
         PriceBook priceBook = priceBookRepository.getPriceBook();
 
         Duration duration = parkingSession.getTotalDuration();

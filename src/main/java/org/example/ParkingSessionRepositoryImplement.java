@@ -4,8 +4,8 @@ public class ParkingSessionRepositoryImplement implements ParkingSessionReposito
 
     private ParkingSession parkingSession;
     @Override
-    public void save(ParkingSession parkingSession) {
-        this.parkingSession = parkingSession;
+    public void save(ParkingSession parkingSession1) {
+        this.parkingSession = parkingSession1;
     }
 
     @Override
