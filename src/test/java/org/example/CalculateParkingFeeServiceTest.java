@@ -46,7 +46,7 @@ class CalculateParkingFeeServiceTest {
     }
     private void give_parking_ends_at(String endText) {
 
-        ParkingSession parkingSession = parkingSessionRepository.find();
+        ParkingSession parkingSession = parkingSessionRepository.find("ABC-1234");
         parkingSession.setEnd(LocalDateTime.parse(endText));
 
 
