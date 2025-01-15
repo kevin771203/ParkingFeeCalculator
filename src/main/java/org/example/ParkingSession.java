@@ -2,6 +2,7 @@ package org.example;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -15,6 +16,11 @@ public final class ParkingSession {
     private final String plate;
     private final LocalDateTime start;
     private LocalDateTime end;
+
+    @NotNull
+    static ParkingSession start(String plate, String startText) {
+        return new ParkingSession(plate, LocalDateTime.parse(startText), null);
+    }
 
 
     List<DailySession> getDailySessions() {

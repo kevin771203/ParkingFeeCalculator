@@ -39,10 +39,20 @@ class CalculateParkingFeeServiceTest {
     }
 
     private void given_car_drives_in_at(String plate, String startText) {
+
+        //start a parking session
+
+        
+        ParkingSession parkingSession = ParkingSession.start(plate, startText);
+
         parkingSessionRepository.save(
-                new ParkingSession(plate, LocalDateTime.parse(startText), null)
+
+                parkingSession
+
         );
+
     }
+
     private void give_car_drives_out_at(String plate, String endText) {
 
         ParkingSession parkingSession = parkingSessionRepository.find(plate);
