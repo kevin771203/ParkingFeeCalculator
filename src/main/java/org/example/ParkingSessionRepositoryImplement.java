@@ -1,7 +1,6 @@
 package org.example;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.HashMap;
@@ -16,12 +15,8 @@ public class ParkingSessionRepositoryImplement implements ParkingSessionReposito
     @Override
     public void save(ParkingSession parkingSession) {
 
-        ParkingSessionPO parkingSessionPO = new ParkingSessionPO();
-        parkingSessionPO.setPlate(parkingSession.getPlate());
-        parkingSessionPO.setStart(parkingSession.getStart().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
-        parkingSessionPO.setEnd(parkingSession.getEnd() == null
-                ? null
-                :parkingSession.getEnd().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+        ParkingSessionPO parkingSessionPO = ParkingSessionPO.of(parkingSession);
+
         this.parkingSessions.put(parkingSession.getPlate(), parkingSessionPO);
     }
 
