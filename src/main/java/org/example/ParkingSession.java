@@ -18,8 +18,8 @@ public final class ParkingSession {
     private LocalDateTime end;
 
     @NotNull
-    static ParkingSession start(String plate, String startText) {
-        return new ParkingSession(plate, LocalDateTime.parse(startText), null);
+    static ParkingSession start(String plate, LocalDateTime startTime) {
+        return new ParkingSession(plate, startTime, null);
     }
 
 
