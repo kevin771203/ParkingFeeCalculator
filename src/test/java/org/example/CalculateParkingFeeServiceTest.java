@@ -54,14 +54,18 @@ class CalculateParkingFeeServiceTest {
     private void give_car_drives_out_at(String plate, String endText) {
 
         ParkingSession parkingSession = parkingSessionRepository.find(plate);
-        parkingSession.setEnd(LocalDateTime.parse(endText));
 
+        LocalDateTime endTime = LocalDateTime.parse(endText);
 
+        parkingSession.end(endTime);
+
+        //make entity do something O
+        //vs.
+        //set some field of entity X
         parkingSessionRepository.save(
                 parkingSession
         );
     }
-
 
 
     private void when_calculator(String plate) {

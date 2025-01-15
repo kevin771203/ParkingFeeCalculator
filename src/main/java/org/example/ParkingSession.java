@@ -22,6 +22,9 @@ public final class ParkingSession {
         return new ParkingSession(plate, startTime, null);
     }
 
+    void end(LocalDateTime endTime) {
+        setEnd(endTime);
+    }
 
     List<DailySession> getDailySessions() {
 
