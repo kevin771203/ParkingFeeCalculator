@@ -14,7 +14,7 @@ import java.util.List;
 public final class ParkingSession {
 
     private final LocalDateTime start;
-    private final LocalDateTime end;
+    private LocalDateTime end;
 
 
     List<DailySession> getDailySessions() {
@@ -57,4 +57,6 @@ public final class ParkingSession {
     Duration getTotalDuration() {
         return Duration.between(getStart(), getEnd());
     }
+
+
 }

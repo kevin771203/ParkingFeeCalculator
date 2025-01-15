@@ -39,16 +39,25 @@ class CalculateParkingFeeServiceTest {
         Assertions.assertThat(actual).isEqualTo(expected);
     }
 
+    private void given_parking_starts_at(String startText) {
+        start = LocalDateTime.parse(startText);
+        parkingSessionRepository.save(
+                new ParkingSession(start, null)
+        );
+    }
     private void give_parking_ends_at(String endText) {
         end = LocalDateTime.parse(endText);
+
+        ParkingSession parkingSession = parkingSessionRepository.find();
+        parkingSession.setEnd(end);
+
+
         parkingSessionRepository.save(
-                new ParkingSession(start, end)
+                parkingSession
         );
     }
 
-    private void given_parking_starts_at(String startText) {
-        start = LocalDateTime.parse(startText);
-    }
+
 
     private void when_calculator() {
         actual = sut.calculate(
