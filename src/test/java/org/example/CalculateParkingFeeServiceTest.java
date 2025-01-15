@@ -27,7 +27,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-02T02:30:01");
+        give_car_drives_out_at("ABC-1234", "2025-01-02T02:30:01");
 
         when_calculator();
 
@@ -44,9 +44,9 @@ class CalculateParkingFeeServiceTest {
                 new ParkingSession(LocalDateTime.parse(startText), null)
         );
     }
-    private void give_parking_ends_at(String endText) {
+    private void give_car_drives_out_at(String plate, String endText) {
 
-        ParkingSession parkingSession = parkingSessionRepository.find("ABC-1234");
+        ParkingSession parkingSession = parkingSessionRepository.find(plate);
         parkingSession.setEnd(LocalDateTime.parse(endText));
 
 
@@ -67,7 +67,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-02T01:00:01");
+        give_car_drives_out_at("ABC-1234", "2025-01-02T01:00:01");
 
         when_calculator();
 
@@ -80,7 +80,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-02T23:50:00");
 
-        give_parking_ends_at("2025-01-04T00:00:00");
+        give_car_drives_out_at("ABC-1234", "2025-01-04T00:00:00");
 
         when_calculator();
 
@@ -93,7 +93,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-03T00:10:00");
+        give_car_drives_out_at("ABC-1234", "2025-01-03T00:10:00");
 
         when_calculator();
 
@@ -106,7 +106,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-04T00:00:00");
+        give_car_drives_out_at("ABC-1234", "2025-01-04T00:00:00");
 
         when_calculator();
 
@@ -119,7 +119,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-02T00:01:00");
 
-        give_parking_ends_at("2025-01-02T00:31:01");
+        give_car_drives_out_at("ABC-1234", "2025-01-02T00:31:01");
 
         when_calculator();
 
@@ -132,7 +132,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-02T00:15:01");
+        give_car_drives_out_at("ABC-1234", "2025-01-02T00:15:01");
 
         when_calculator();
 
@@ -144,7 +144,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-05T00:00:00");
 
-        give_parking_ends_at("2025-01-05T00:15:01");
+        give_car_drives_out_at("ABC-1234", "2025-01-05T00:15:01");
 
         when_calculator();
 
@@ -157,7 +157,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-04T00:00:00");
 
-        give_parking_ends_at("2025-01-05T00:00:00");
+        give_car_drives_out_at("ABC-1234", "2025-01-05T00:00:00");
 
         when_calculator();
 
@@ -170,7 +170,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-01T00:00:00");
 
-        give_parking_ends_at("2025-01-01T00:15:01");
+        give_car_drives_out_at("ABC-1234", "2025-01-01T00:15:01");
 
         when_calculator();
 
@@ -183,7 +183,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-04T00:00:00");
 
-        give_parking_ends_at("2025-01-04T00:15:01");
+        give_car_drives_out_at("ABC-1234", "2025-01-04T00:15:01");
 
         when_calculator();
 
@@ -196,7 +196,7 @@ class CalculateParkingFeeServiceTest {
 
         given_parking_starts_at("2025-01-02T00:00:00");
 
-        give_parking_ends_at("2025-01-02T00:15:00");
+        give_car_drives_out_at("ABC-1234", "2025-01-02T00:15:00");
 
         when_calculator();
 
