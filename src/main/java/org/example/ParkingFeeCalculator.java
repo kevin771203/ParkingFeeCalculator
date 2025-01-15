@@ -9,7 +9,11 @@ public class ParkingFeeCalculator {
     private Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
     public ParkingFeeCalculator() {
-        priceBook = new PriceBook();
+//        priceBook = new PriceBook();
+
+        PriceBookRepository priceBookRepository = new PriceBookRepository(new PriceBook());
+        priceBook = priceBookRepository.getPriceBook();
+
     }
 
     public long calculate(ParkingSession parkingSession) {
