@@ -16,7 +16,9 @@ class CalculateParkingFeeServiceTest {
 
     @BeforeEach
     void setUp() {
-        sut = new CalculateParkingFeeService();
+        sut = new CalculateParkingFeeService(
+                new PriceBookRepositoryImplement(new PriceBook()),
+                new ParkingSessionRepositoryImplement());
     }
 
     @Test
