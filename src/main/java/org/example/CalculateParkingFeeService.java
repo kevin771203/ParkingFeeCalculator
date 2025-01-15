@@ -3,16 +3,16 @@ package org.example;
 import java.time.Duration;
 import java.util.List;
 
-public class ParkingFeeCalculator {
+public class CalculateParkingFeeService {
 
     private PriceBookRepository priceBookRepository;
     private Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
-    public ParkingFeeCalculator() {
+    public CalculateParkingFeeService() {
         this(new PriceBookRepository(new PriceBook()));
     }
 
-    public ParkingFeeCalculator(PriceBookRepository priceBookRepository) {
+    public CalculateParkingFeeService(PriceBookRepository priceBookRepository) {
 
         this.priceBookRepository = priceBookRepository;
 
