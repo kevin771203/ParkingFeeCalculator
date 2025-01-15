@@ -6,12 +6,17 @@ import java.util.List;
 public class ParkingFeeCalculator {
 
     private final PriceBook priceBook;
+    private PriceBookRepository priceBookRepository;
     private Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
     public ParkingFeeCalculator() {
+        this(new PriceBookRepository(new PriceBook()));
+    }
+
+    public ParkingFeeCalculator(PriceBookRepository priceBookRepository) {
 //        priceBook = new PriceBook();
 
-        PriceBookRepository priceBookRepository = new PriceBookRepository(new PriceBook());
+        this.priceBookRepository = priceBookRepository;
         priceBook = priceBookRepository.getPriceBook();
 
     }
