@@ -1,14 +1,10 @@
 package org.example;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingSessionRepositoryImplement implements ParkingSessionRepository {
 
-    private Map<String, ParkingSession> parkingSessionsOld = new HashMap<>();
     private Map<String, ParkingSessionPO> parkingSessions = new HashMap<>();
 
 
@@ -25,16 +21,15 @@ public class ParkingSessionRepositoryImplement implements ParkingSessionReposito
 
         ParkingSessionPO parkingSessionPO = this.parkingSessions.get(plate);
 
-        return parkingSessionPO == null
-                ? null
-                : new ParkingSession(
-                parkingSessionPO.getPlate(),
-                LocalDateTime.ofInstant(Instant.ofEpochMilli(parkingSessionPO.getStart()), ZoneId.systemDefault()),
-                parkingSessionPO.getEnd() == null
-                        ? null
-                        : LocalDateTime.ofInstant(Instant.ofEpochMilli(parkingSessionPO.getEnd()), ZoneId.systemDefault())
-        );
+        if (parkingSessionPO == null) {
+            return null;
+        }
+
+        ParkingSession parkingSession = ParkingSessionPO.toEntity(parkingSessionPO);
+        return parkingSession;
+
 
 
     }
+
 }
