@@ -8,9 +8,7 @@ import java.time.LocalDateTime;
 
 
 class CalculateParkingFeeServiceTest {
-
-    private LocalDateTime start;
-    private LocalDateTime end;
+    
     private long actual;
     private CalculateParkingFeeService sut;
     private ParkingSessionRepository parkingSessionRepository = new ParkingSessionRepositoryImplement();
@@ -40,16 +38,16 @@ class CalculateParkingFeeServiceTest {
     }
 
     private void given_parking_starts_at(String startText) {
-        start = LocalDateTime.parse(startText);
+
         parkingSessionRepository.save(
-                new ParkingSession(start, null)
+                new ParkingSession(LocalDateTime.parse(startText), null)
         );
     }
     private void give_parking_ends_at(String endText) {
-        end = LocalDateTime.parse(endText);
+
 
         ParkingSession parkingSession = parkingSessionRepository.find();
-        parkingSession.setEnd(end);
+        parkingSession.setEnd(LocalDateTime.parse(endText));
 
 
         parkingSessionRepository.save(
