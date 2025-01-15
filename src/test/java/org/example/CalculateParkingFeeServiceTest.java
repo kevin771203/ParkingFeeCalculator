@@ -13,12 +13,13 @@ class CalculateParkingFeeServiceTest {
     private LocalDateTime end;
     private long actual;
     private CalculateParkingFeeService sut;
+    private ParkingSessionRepository parkingSessionRepository = new ParkingSessionRepositoryImplement();
 
     @BeforeEach
     void setUp() {
         sut = new CalculateParkingFeeService(
                 new PriceBookRepositoryImplement(new PriceBook()),
-                new ParkingSessionRepositoryImplement());
+                parkingSessionRepository);
     }
 
     @Test
@@ -40,6 +41,9 @@ class CalculateParkingFeeServiceTest {
 
     private void give_parking_ends_at(String endText) {
         end = LocalDateTime.parse(endText);
+        parkingSessionRepository.save(
+                new ParkingSession(start, end)
+        );
     }
 
     private void given_parking_starts_at(String startText) {
@@ -48,7 +52,7 @@ class CalculateParkingFeeServiceTest {
 
     private void when_calculator() {
         actual = sut.calculate(
-                new ParkingSession(start, end));
+        );
     }
 
     @Test

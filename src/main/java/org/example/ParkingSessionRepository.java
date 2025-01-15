@@ -1,7 +1,7 @@
 package org.example;
 
 public interface ParkingSessionRepository {
-    void save(ParkingSession parkingSession1);
+    void save(ParkingSession parkingSession);
 
     ParkingSession find();
 }

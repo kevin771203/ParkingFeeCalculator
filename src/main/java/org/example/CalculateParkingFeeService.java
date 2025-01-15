@@ -5,16 +5,16 @@ import java.util.List;
 
 public class CalculateParkingFeeService {
 
-    private final ParkingSessionRepositoryImplement parkingSessionRepository;
+    private final ParkingSessionRepository parkingSessionRepository;
 //    private final ParkingSessionRepository parkingSessionRepository = this.parkingSessionRepository;
     private PriceBookRepository priceBookRepository;
     private Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
-    public CalculateParkingFeeService() {
-        this(new PriceBookRepositoryImplement(new PriceBook()), new ParkingSessionRepositoryImplement());
-    }
+//    public CalculateParkingFeeService() {
+//        this(new PriceBookRepositoryImplement(new PriceBook()), new ParkingSessionRepositoryImplement());
+//    }
 
-    public CalculateParkingFeeService(PriceBookRepository priceBookRepository, ParkingSessionRepositoryImplement parkingSessionRepository) {
+    public CalculateParkingFeeService(PriceBookRepository priceBookRepository, ParkingSessionRepository parkingSessionRepository) {
 
         this.priceBookRepository = priceBookRepository;
 
@@ -22,12 +22,10 @@ public class CalculateParkingFeeService {
 
     }
 
-    public long calculate(ParkingSession parkingSession1) {
+    public long calculate() {
 
-        parkingSessionRepository.save(parkingSession1);
 
         ParkingSession parkingSession = parkingSessionRepository.find();
-
         PriceBook priceBook = priceBookRepository.getPriceBook();
 
         Duration duration = parkingSession.getTotalDuration();
