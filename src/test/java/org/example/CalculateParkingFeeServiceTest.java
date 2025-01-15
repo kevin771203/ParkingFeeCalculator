@@ -9,8 +9,7 @@ import java.time.LocalDateTime;
 
 class CalculateParkingFeeServiceTest {
 
-    private LocalDateTime start;
-    private LocalDateTime end;
+  
     private long actual;
     private CalculateParkingFeeService sut;
     private ParkingSessionRepository parkingSessionRepository = new ParkingSessionRepositoryImplement();
