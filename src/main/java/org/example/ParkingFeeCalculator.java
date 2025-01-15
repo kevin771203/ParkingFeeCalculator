@@ -5,7 +5,6 @@ import java.util.List;
 
 public class ParkingFeeCalculator {
 
-    private final PriceBook priceBook;
     private PriceBookRepository priceBookRepository;
     private Duration FIFTY_MINUTES = Duration.ofMinutes(15L);
 
@@ -14,14 +13,14 @@ public class ParkingFeeCalculator {
     }
 
     public ParkingFeeCalculator(PriceBookRepository priceBookRepository) {
-//        priceBook = new PriceBook();
 
         this.priceBookRepository = priceBookRepository;
-        priceBook = priceBookRepository.getPriceBook();
 
     }
 
     public long calculate(ParkingSession parkingSession) {
+
+        PriceBook priceBook = priceBookRepository.getPriceBook();
 
         Duration duration = parkingSession.getTotalDuration();
 
