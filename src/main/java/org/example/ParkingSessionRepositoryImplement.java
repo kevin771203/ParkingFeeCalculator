@@ -23,7 +23,6 @@ public class ParkingSessionRepositoryImplement implements ParkingSessionReposito
                 ? null
                 :parkingSession.getEnd().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
         this.parkingSessions.put(parkingSession.getPlate(), parkingSessionPO);
-//        this.parkingSessionsOld.put(parkingSession.getPlate(), parkingSession);
     }
 
     @Override
@@ -41,8 +40,6 @@ public class ParkingSessionRepositoryImplement implements ParkingSessionReposito
                         : LocalDateTime.ofInstant(Instant.ofEpochMilli(parkingSessionPO.getEnd()), ZoneId.systemDefault())
         );
 
-
-//        return this.parkingSessionsOld.get(plate);
 
     }
 }
